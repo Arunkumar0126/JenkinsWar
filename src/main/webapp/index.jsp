@@ -1,5 +1,5 @@
 <html>
 <body>
-<h2>Jenkins Successfully build and deployed war file.</h2>
+<h2>End to end automation successful</h2>
 </body>
 </html>
