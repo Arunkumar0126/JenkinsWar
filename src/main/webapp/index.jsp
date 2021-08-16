@@ -1,5 +1,5 @@
 <html>
 <body>
-<h2>End to end automation successful</h2>
+<h2>Successfully built war file and deployed to Tomcat Server by Rocky</h2>
 </body>
 </html>
