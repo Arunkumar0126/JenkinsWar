@@ -1,0 +1,16 @@
+---
+ - name: END2END
+   hosts: tomcat
+   tasks:
+     - name: REMOVE OLD
+       shell: rm -rf JenkinsWar
+     - name: CLONE
+       shell: git clone https://github.com/Rocky05/JenkinsWar.git
+     - name: SWITCHING DIRECTORY
+       shell: cd /root/JenkinsWar
+     - name: MAVEN BUILD
+       shell: mvn -f /root/JenkinsWar/pom.xml clean package
+     - name: REMOVE OLD CODE
+       shell: rm -rf /opt/apache-tomcat-8.5.69/webapps/JenkinsWar
+     - name: COPY FROM LOCAL TO TOMCAT
+       shell: cp -rf /root/JenkinsWar/target/JenkinsWar /opt/apache-tomcat-8.5.69/webapps/JenkinsWar
