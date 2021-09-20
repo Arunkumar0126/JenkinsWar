@@ -1,0 +1,24 @@
+  ---
+  - hosts: docker
+    become: true
+    tasks:
+     - name: Stop and Remove previously running container
+       shell: docker rm -f mytomcatapp
+
+     - name: Copying index to remote server
+       copy: src=dockerfile dest=/opt/docker_project
+     - name: Build Docker image
+       shell: docker build -t myowntomcat .
+	  args:
+        chdir: "/opt/docker_project"
+     - name: Tag newly built image
+       shell: docker tag myowntomcat itzcherry/myowntomcat
+     - name: Login to Docker Hub account and Push image
+       shell: |
+	     docker login -u itzcherry -p d7ef4441-ef6b-4c4c-9a34-c6c6dad6043c
+		 docker push itzcherry/myowntomcat
+                 docker logout
+		 echo -e "\nSuccessfully pushed image and logged out"
+     - name: Remove previously built image from local system
+       shell: docker rmi myowntomcat itzcherry/myowntomcat
+
