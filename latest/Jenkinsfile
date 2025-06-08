@@ -20,7 +20,12 @@ pipeline {
         }
         stage('tomcat deployment') {
             steps {
-                sh 'sudo cp -r target/JenkinsWar.war /opt/tomcat11/webapps/latestdeployment/'
+                sh 'cp -r target/JenkinsWar.war /opt/tomcat11/webapps/latestdeployment/'
+            }
+        }
+        stage('extract war file') {
+            steps {
+                sh 'unzip JenkinsWar.war -d junemonthrelease'
             }
         }		
     }
