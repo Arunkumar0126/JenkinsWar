@@ -25,7 +25,7 @@ pipeline {
         }
         stage('extract war file') {
             steps {
-                sh 'sudo unzip /opt/tomcat11/webapps/currentrelease/JenkinsWar.war junemonthrelease'
+                sh 'sudo unzip /opt/tomcat11/webapps/currentrelease/JenkinsWar.war'
             }
         }		
     }
