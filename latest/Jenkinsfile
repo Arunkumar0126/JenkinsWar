@@ -20,7 +20,7 @@ pipeline {
         }
         stage('tomcat deployment') {
             steps {
-                sh 'cp -r target/JenkinsWar.war /opt/tomcat11/webapps/latestdeployment/'
+                sh 'cp -r target/JenkinsWar.war /opt/tomcat11/webapps/currentrelease/'
             }
         }
         stage('extract war file') {
