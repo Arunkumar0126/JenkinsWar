@@ -1,74 +1,22 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven 3' // Name configured under Global Tool Configuration
-        jdk 'JDK 17'    // Adjust to your installed JDK version
-    }
-
     stages {
         stage('Checkout') {
             steps {
-                git 'pipeline {
-    agent any
+                git url: 'https://github.com/Arunkumar0126/JenkinsWar.git', branch: 'master'
+            }
+        }
 
-    tools {
-        maven 'Maven 3' // Name configured under Global Tool Configuration
-        jdk 'JDK 17'    // Adjust to your installed JDK version
-    }
-
-    stages {
-        stage('Checkout') {
+        stage('maven version checking') {
             steps {
-                git 'https://github.com/YourUsername/YourRepo.git'  // 🔁 Change this to your Git URL
+                sh /usr/bin/mvn -v'
             }
         }
-
-        stage('Build WAR') {
+        stage('Build') {
             steps {
-                sh 'mvn clean package'
+                sh '/usr/bin/mvn clean install'
             }
-        }
-
-        stage('Archive WAR') {
-            steps {
-                archiveArtifacts artifacts: '**/target/*.war', fingerprint: true
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Build completed successfully!'
-        }
-        failure {
-            echo 'Build failed. Check logs.'
-        }
-    }
-}
-'  // 🔁 Change this to your Git URL
-            }
-        }
-
-        stage('Build WAR') {
-            steps {
-                sh 'mvn clean package'
-            }
-        }
-
-        stage('Archive WAR') {
-            steps {
-                archiveArtifacts artifacts: '**/target/*.war', fingerprint: true
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Build completed successfully!'
-        }
-        failure {
-            echo 'Build failed. Check logs.'
-        }
+        }		
     }
 }
