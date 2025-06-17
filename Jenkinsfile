@@ -1,22 +1,41 @@
 pipeline {
     agent any
 
+ 
+    environment {
+        TOMCAT_DIR = "/opt/tomcat11"
+        WAR_NAME = "mynewapplication.war"
+    }
+	
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/Arunkumar0126/JenkinsWar.git', branch: 'master'
+                git 'https://github.com/Arunkumar0126/JenkinsWar.git'
             }
         }
 
-        stage('maven version checking') {
+        stage('Build WAR') {
             steps {
-                sh /usr/bin/mvn -v'
+                sh 'mvn clean package'
             }
         }
-        stage('Build') {
+
+        stage('Deploy WAR to Tomcat') {
             steps {
-                sh '/usr/bin/mvn clean install'
+                sh '''
+                    WAR_FILE=$(find target -name "*.war" | head -n 1)
+                    if [ -f "$WAR_FILE" ]; then
+                        echo "Stopping Tomcat..."
+                        sudo sh /opt/tomcat11/bin/ shutdown.sh
+
+                        echo "Starting Tomcat..."
+                        sudo sh /opt/tomcat11/bin/ startup.sh
+                    else
+                        echo "WAR file not found!"
+                        exit 1
+                    fi
+                '''
             }
-        }		
+        }
     }
 }
