@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh '/usr/bin/mvn clean install'
+                sh '/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven-3/bin/mvn clean install'
             }
         }
     }
