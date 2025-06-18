@@ -17,12 +17,12 @@ pipeline {
 
         stage('maven version checking') {
             steps {
-                sh '/usr/bin/mvn -v'
+                sh '/opt/maven/bin/mvn -v'
             }
         }
         stage('Build') {
             steps {
-                sh '/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven-3/bin/mvn clean install'
+                sh '/opt/maven/bin/mvn clean install'
             }
         }
         stage('mydedeploy') {
