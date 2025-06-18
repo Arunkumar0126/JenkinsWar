@@ -20,7 +20,7 @@ pipeline {
         }
         stage('mydedeploy') {
             steps {
-                sh 'sudo scp -o StrictHostKeyChecking=no -r /var/lib/jenkins/workspace/pipeline/target/JenkinsWar.war ec2-user@172.31.16.24:/home/ec2-user/'
+                sh 'scp -o StrictHostKeyChecking=no -r /var/lib/jenkins/workspace/pipeline/target/JenkinsWar.war ec2-user@172.31.16.24:/home/ec2-user/'
             }
         }
     }
